@@ -1,0 +1,31 @@
+import java.util.Random;
+import java.util.Scanner;
+
+//Faça um programa que preencha um vetor com nove números inteiros,
+// calcule e mostre os números primos e suas respectivas posições.
+
+public class Vetor {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int i;
+        int j;
+        int[] vetor = new int[9];
+        for (i = 0; i < vetor.length; i++) {
+            vetor[i] = Math.abs(random.nextInt(100)+1);
+        }
+        for (i = 0; i < vetor.length; i++) {
+            int cont = 0;
+            for (j = 1; j <= vetor[i]; j++) {
+                if (vetor[i] % j == 0) {
+                    cont++;
+                }
+            }
+            if (cont<=2) {
+                System.out.println(vetor[i]+" e primo");
+            }
+        }
+        input.close();
+
+    }
+}
