@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class SepararPositivosENegativos {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Preenchendo o vetor com 8 números inteiros
+        int[] vetor = new int[8];
+        System.out.println("Preencha o vetor com 8 números inteiros:");
+        for (int i = 0; i < 8; i++) {
+            System.out.print("Digite o número " + (i + 1) + ": ");
+            vetor[i] = scanner.nextInt();
+        }
+
+        // Separando os números positivos e negativos
+        int[] positivos = new int[8]; // Máximo de 8 posições, pode haver menos
+        int[] negativos = new int[8]; // Máximo de 8 posições, pode haver menos
+        int posIndex = 0;
+        int negIndex = 0;
+
+        for (int i = 0; i < 8; i++) {
+            if (vetor[i] >= 0) {
+                positivos[posIndex++] = vetor[i];
+            } else {
+                negativos[negIndex++] = vetor[i];
+            }
+        }
+
+        // Mostrando os vetores resultantes
+        System.out.println("\nVetor dos números positivos:");
+        for (int i = 0; i < posIndex; i++) {
+            System.out.print(positivos[i] + " ");
+        }
+
+        System.out.println("\nVetor dos números negativos:");
+        for (int i = 0; i < negIndex; i++) {
+            System.out.print(negativos[i] + " ");
+        }
+    }
+}
