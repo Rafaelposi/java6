@@ -1,0 +1,92 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+class CompanhiaAerea {
+    private HashMap<Integer, String[]> voos;
+    private HashMap<Integer, Integer> lugaresDisponiveis;
+
+    public CompanhiaAerea() {
+        voos = new HashMap<>();
+        lugaresDisponiveis = new HashMap<>();
+    }
+
+    public void adicionarVoo(int numeroVoo, String origem, String destino, int lugaresDisponiveis) {
+        voos.put(numeroVoo, new String[]{origem, destino});
+        this.lugaresDisponiveis.put(numeroVoo, lugaresDisponiveis);
+    }
+
+    public void consultarPorNumero(int numeroVoo) {
+        if (voos.containsKey(numeroVoo)) {
+            String[] infoVoo = voos.get(numeroVoo);
+            int lugares = lugaresDisponiveis.get(numeroVoo);
+            System.out.println("Voo " + numeroVoo + ": Origem: " + infoVoo[0] + ", Destino: " + infoVoo[1] + ", Lugares Disponíveis: " + lugares);
+        } else {
+            System.out.println("Voo inexistente");
+        }
+    }
+
+    public void efetuarReserva(int numeroVoo) {
+        if (voos.containsKey(numeroVoo)) {
+            int lugares = lugaresDisponiveis.get(numeroVoo);
+            if (lugares > 0) {
+                lugaresDisponiveis.put(numeroVoo, lugares - 1);
+                System.out.println("Reserva confirmada");
+            } else {
+                System.out.println("Voo lotado");
+            }
+        } else {
+            System.out.println("Voo inexistente");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CompanhiaAerea companhia = new CompanhiaAerea();
+        Scanner scanner = new Scanner(System.in);
+
+        companhia.adicionarVoo(1, "Origem1", "Destino1", 100);
+        companhia.adicionarVoo(2, "Origem2", "Destino2", 50);
+
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Consultar");
+            System.out.println("2. Efetuar reserva");
+            System.out.println("3. Sair");
+
+            System.out.print("Escolha uma opção: ");
+            int opcao = scanner.nextInt();
+
+            if (opcao == 1) {
+                System.out.println("\nMenu de Consulta:");
+                System.out.println("1. Por número do voo");
+                System.out.println("2. Por origem");
+                System.out.println("3. Por destino");
+
+                System.out.print("Escolha uma opção: ");
+                int opcaoConsulta = scanner.nextInt();
+
+                if (opcaoConsulta == 1) {
+                    System.out.print("Digite o número do voo: ");
+                    int numeroVoo = scanner.nextInt();
+                    companhia.consultarPorNumero(numeroVoo);
+                } else if (opcaoConsulta == 2) {
+                    // Implementar consulta por origem
+                } else if (opcaoConsulta == 3) {
+                    // Implementar consulta por destino
+                } else {
+                    System.out.println("Opção inválida");
+                }
+            } else if (opcao == 2) {
+                System.out.print("Digite o número do voo: ");
+                int numeroVoo = scanner.nextInt();
+                companhia.efetuarReserva(numeroVoo);
+            } else if (opcao == 3) {
+                System.out.println("Encerrando o programa...");
+                break;
+            } else {
+                System.out.println("Opção inválida");
+            }
+        }
+    }
+}
